@@ -3,40 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <title>Restaurant - Home</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fdfdfd;
+    }
+
+    /* Header */
+    header {
+      background: palevioletred;
+      padding: 15px 30px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      height: 80px;
+      margin-right: 12px;
+      border-radius: 50%;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffe6e6;
+    }
+
+    /* Hero Section */
+    section {
+      padding: 40px;
+      text-align: center;
+    }
+
+    section img {
+      width: 80%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    section h2 {
+      margin-top: 25px;
+      font-size: 32px;
+      color: #333;
+    }
+
+    section p {
+      font-size: 18px;
+      color: #555;
+      margin: 10px auto;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+  </style>
 </head>
-<body style="margin:0; font-family:Arial, sans-serif; background:#fdfdfd;">
+<body>
 
   <!-- Header -->
-  <header style="background:palevioletred; padding:15px 30px; color:white; display:flex; align-items:center; justify-content:space-between; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+  <header>
     <!-- Logo -->
     <div style="display:flex; align-items:center;">
-      <img src="https://i.fbcd.co/products/resized/resized-750-500/3feb4c40b24e7b8ab8c9f5f20c44b8fa83409b2992bb5c5cbdd6491c12f58c61.jpg" alt="Logo" style="height:80px; margin-right:12px; border-radius:50%;">
-      <h1 style="margin:0; font-size:28px;">Delicious Restaurant</h1>
+      <img src="https://i.fbcd.co/products/resized/resized-750-500/3feb4c40b24e7b8ab8c9f5f20c44b8fa83409b2992bb5c5cbdd6491c12f58c61.jpg" alt="Logo">
+      <h1>Delicious Restaurant</h1>
     </div>
 
     <!-- Navigation -->
     <nav>
-      <a href="/" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Home</a>
-      <a href="/about" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">About</a>
-      <a href="/menu" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Menu</a>
-      <a href="/gallery" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Gallery</a>
-      <a href="/contact" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Contact</a>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/menu">Menu</a>
+      <a href="/gallery">Gallery</a>
+      <a href="/contact">Contact</a>
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section style="padding:40px; text-align:center;">
-    <img src="https://assets.bonappetit.com/photos/61ba70da510874520d257b78/16:9/w_2560%2Cc_limit/LEDE_Oma's%2520Hideaway%2C%2520Credit%2520Christine%2520Dong.jpg" 
-         alt="Restaurant" 
-         style="width:80%; max-height:400px; object-fit:cover; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.2);">
+  <section>
+    <img src="https://assets.bonappetit.com/photos/61ba70da510874520d257b78/16:9/w_2560%2Cc_limit/LEDE_Oma's%2520Hideaway%2C%2520Credit%2520Christine%2520Dong.jpg" alt="Restaurant">
 
-    <h2 style="margin-top:25px; font-size:32px; color:#333;">Welcome to Delicious Restaurant</h2>
-    <p style="font-size:18px; color:#555; margin:10px auto; max-width:700px; line-height:1.6;">
-      Enjoy the best food in town with love, taste, and unforgettable dining experiences.  
+    <h2>Welcome to Delicious Restaurant</h2>
+    <p>
+      Enjoy the best food in town with love, taste, and unforgettable dining experiences.
     </p>
   </section>
-
-
 
 </body>
 </html>
