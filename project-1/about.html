@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant - About</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fffafc;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: palevioletred;
+      padding: 15px 30px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header img {
+      height: 70px;
+      border-radius: 8px;
+      margin-right: 12px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin: 0;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.2s;
+    }
+
+    nav a:hover {
+      color: #ffe6f0;
+      transform: scale(1.1);
+    }
+
+    /* About Section */
+    section {
+      padding: 60px 10%;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      text-align: left;
+    }
+
+    section img {
+      width: 40%;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    section img:hover {
+      transform: scale(1.05);
+    }
+
+    section h2 {
+      font-size: 32px;
+      color: #222;
+      margin-bottom: 15px;
+    }
+
+    section p {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <!-- Logo -->
+    <div style="display:flex; align-items:center;">
+      <img src="https://i.fbcd.co/products/resized/resized-750-500/3feb4c40b24e7b8ab8c9f5f20c44b8fa83409b2992bb5c5cbdd6491c12f58c61.jpg" alt="Logo">
+      <h1>Delicious Restaurant</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/menu">Menu</a>
+      <a href="/gallery">Gallery</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Content -->
+  <section>
+    <img src="https://images.ctfassets.net/rric2f17v78a/4lDQ68azYdrmQ4ZkLs5M7b/ccfdeb359c65a4fa05e6e10ea78ca3ec/Kitchen-Design.jpg" alt="Our Chef">
+    <div>
+      <h2>About Us</h2>
+      <p>We started in 2005 with a mission to serve delicious meals made from fresh ingredients. Our chefs craft each dish with love and passion to bring you the best dining experience. From traditional recipes to modern flavors, we serve happiness on every plate.</p>
+    </div>
+  </section>
+
+</body>
+</html>

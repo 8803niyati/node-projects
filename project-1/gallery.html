@@ -2,21 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Gallery</title>
+  <title>Restaurant - Gallery</title>
 </head>
-<body>
+<body style="margin:0; font-family:Arial, sans-serif; background:#fff8f8;">
+
   <!-- Header -->
-  <header style="background:#333; padding:15px;">
-    <nav style="text-align:center;">
-      <a href="/" style="color:white; margin:0 15px; text-decoration:none;">Home</a>
-      <a href="/blog" style="color:white; margin:0 15px; text-decoration:none;">Blog</a>
-      <a href="/services" style="color:white; margin:0 15px; text-decoration:none;">Services</a>
-      <a href="/contact" style="color:white; margin:0 15px; text-decoration:none;">Contact</a>
-      <a href="/gallery" style="color:white; margin:0 15px; text-decoration:none;">Gallery</a>
+  <header style="background:palevioletred; padding:15px 30px; color:white; display:flex; align-items:center; justify-content:space-between; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+    <!-- Logo -->
+    <div style="display:flex; align-items:center;">
+      <img src="https://i.fbcd.co/products/resized/resized-750-500/3feb4c40b24e7b8ab8c9f5f20c44b8fa83409b2992bb5c5cbdd6491c12f58c61.jpg" alt="Logo" style="height:70px; margin-right:12px; border-radius:8px;">
+      <h1 style="margin:0; font-size:26px;">Delicious Restaurant</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <a href="/" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Home</a>
+      <a href="/about" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">About</a>
+      <a href="/menu" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Menu</a>
+      <a href="/gallery" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Gallery</a>
+      <a href="/contact" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Contact</a>
     </nav>
   </header>
 
-  <h1>Gallery Page</h1>
-  <p>Check out some amazing pictures in our gallery.</p>
+  <!-- Gallery Section -->
+  <section style="padding:10px; text-align:center;">
+    <h2 style="font-size:30px; margin-bottom:30px; color:#333;"> Our Food & Ambience</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px; max-width:1100px; margin:0 auto;">
+      <div style="overflow:hidden; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); transition:transform 0.3s;">
+        <img src="https://www.concretecms.com/application/files/9417/1778/2239/Restaurant_Websites.jpg" style="width:100%; height:250px; object-fit:cover;">
+      </div>
+      <div style="overflow:hidden; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); transition:transform 0.3s;">
+        <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?cs=srgb&dl=pexels-chanwalrus-958545.jpg&fm=jpg" style="width:100%; height:250px; object-fit:cover;">
+      </div>
+      <div style="overflow:hidden; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); transition:transform 0.3s;">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/ec/c2/ea/delicious-food-will-cobra.jpg?w=900&h=500&s=1" style="width:100%; height:250px; object-fit:cover;">
+      </div>
+      <div style="overflow:hidden; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); transition:transform 0.3s;">
+        <img src="https://thumbs.dreamstime.com/b/coffee-cup-steaming-hot-espresso-drink-coffee-beans-around-coffee-cup-steaming-hot-drink-coffee-beans-around-272952461.jpg" style="width:100%; height:250px; object-fit:cover;">
+      </div>
+      <div style="overflow:hidden; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); transition:transform 0.3s;">
+        <img src="https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/2025-01/Dessert%20Menu%20Ideas%20for%20Restaurant.jpg" style="width:100%; height:250px; object-fit:cover;">
+      </div>
+      <div style="overflow:hidden; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); transition:transform 0.3s;">
+        <img src="https://thumbs.dreamstime.com/b/two-refreshing-cocktails-mint-strawberries-lime-garnish-wood-table-cold-beverages-summer-bar-restaurant-drinks-fresh-387291465.jpg" style="width:100%; height:250px; object-fit:cover;">
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Hover zoom effect
+    document.querySelectorAll("section div div").forEach(card => {
+      card.addEventListener("mouseenter", () => {
+        card.style.transform = "scale(1.05)";
+        card.style.boxShadow = "0 12px 20px rgba(0,0,0,0.2)";
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "scale(1)";
+        card.style.boxShadow = "0 6px 12px rgba(0,0,0,0.1)";
+      });
+    });
+  </script>
+
 </body>
 </html>

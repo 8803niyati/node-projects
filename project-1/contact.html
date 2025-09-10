@@ -2,21 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact</title>
+  <title>Restaurant - Contact</title>
 </head>
-<body>
+<body style="margin:0; font-family:Arial, sans-serif; background:linear-gradient(135deg, #fff5f5, #ffece6);">
+
   <!-- Header -->
-  <header style="background:#333; padding:15px;">
-    <nav style="text-align:center;">
-      <a href="/" style="color:white; margin:0 15px; text-decoration:none;">Home</a>
-      <a href="/blog" style="color:white; margin:0 15px; text-decoration:none;">Blog</a>
-      <a href="/services" style="color:white; margin:0 15px; text-decoration:none;">Services</a>
-      <a href="/contact" style="color:white; margin:0 15px; text-decoration:none;">Contact</a>
-      <a href="/gallery" style="color:white; margin:0 15px; text-decoration:none;">Gallery</a>
+  <header style="background:palevioletred; padding:15px 30px; color:white; display:flex; align-items:center; justify-content:space-between; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+    <!-- Logo -->
+    <div style="display:flex; align-items:center;">
+      <img src="https://i.fbcd.co/products/resized/resized-750-500/3feb4c40b24e7b8ab8c9f5f20c44b8fa83409b2992bb5c5cbdd6491c12f58c61.jpg" alt="Logo" style="height:80px; margin-right:12px; border-radius:50%;">
+      <h1 style="margin:0; font-size:26px;">Delicious Restaurant</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <a href="/" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Home</a>
+      <a href="/about" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">About</a>
+      <a href="/menu" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Menu</a>
+      <a href="/gallery" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Gallery</a>
+      <a href="/contact" style="margin:0 12px; color:white; text-decoration:none; font-weight:bold;">Contact</a>
     </nav>
   </header>
 
-  <h1>Contact Us</h1>
-  <p>Email: info@example.com | Phone: 123-456-7890</p>
+  <!-- Contact Section -->
+  <section style="display:flex; justify-content:center; align-items:center; min-height:80vh; padding:20px;">
+    <div style="background:white;
+                padding:30px;
+                border-radius:12px;
+                box-shadow:0 8px 20px rgba(0,0,0,0.15); 
+                width:100%; 
+                max-width:420px;
+                transition:0.3s;">
+      <h2 style="text-align:center;
+                 margin-bottom:20px; 
+                 color:palevioletred;"> Get in Touch</h2>
+      <form style="display:flex; flex-direction:column; gap:15px;">
+        <input type="text" placeholder="Your Name" required 
+               style="padding:12px; border:1px solid #ddd; border-radius:8px; font-size:16px; outline:none; transition:0.3s;">
+        <input type="email" placeholder="Your Email" required 
+               style="padding:12px; border:1px solid #ddd; border-radius:8px; font-size:16px; outline:none; transition:0.3s;">
+        <textarea placeholder="Your Message" rows="5"
+               style="padding:12px; border:1px solid #ddd; border-radius:8px; font-size:16px; resize:none; outline:none; transition:0.3s;"></textarea>
+        <button type="submit" 
+                style="background:palevioletred; color:white; padding:12px; border:none; border-radius:8px; font-size:16px; cursor:pointer; transition:0.3s;">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </section>
+
 </body>
 </html>
