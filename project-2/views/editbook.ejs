@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Book</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      background: linear-gradient(135deg, #e3f2fd, #f4f6f9); 
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+     header {
+      background: linear-gradient(90deg, #d8c4c9, #ff9671);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    header .logo {
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+   
+    header .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+   
+    /* Main center */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Form Card */
+    form { 
+      background:white; 
+      padding:30px; 
+      border-radius:10px; 
+      box-shadow:0 5px 20px rgba(0,0,0,0.15); 
+      width:350px; 
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+    form h2 {
+      margin-bottom: 15px;
+      color: #3f51b5;
+    }
+    input { 
+      width:100%; 
+      padding:10px; 
+      margin:10px 0; 
+      border:1px solid #ccc; 
+      border-radius:6px; 
+      outline:none;
+      transition: 0.3s;
+    }
+    input:focus {
+      border-color: #3f51b5;
+      box-shadow: 0 0 5px rgba(63,81,181,0.5);
+    }
+    button { 
+      background:#3f51b5; 
+      color:white; 
+      padding:12px; 
+      border:none; 
+      border-radius:6px; 
+      cursor:pointer; 
+      width:100%; 
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button:hover { 
+      background:#303f9f; 
+      transform: scale(1.03);
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+   
+    <a href="/" class="logo">📚 My Library</a>
+  </header>
+
+  <main>
+    <form method="POST" action="/edit-book/<%= book.id %>">
+      <h2>Edit Book</h2>
+      <input type="text" name="id" value="<%= book.id %>" readonly>
+      <input type="text" name="title" value="<%= book.title %>" placeholder="Book Title" required>
+      <input type="text" name="author" value="<%= book.author %>" placeholder="Author Name" required>
+      <input type="text" name="category" value="<%= book.category %>" placeholder="Category" required>
+      <input type="text" name="image" value="<%= book.image %>" placeholder="Image URL " required>
+      <button type="submit">Update Book</button>
+    </form>
+  </main>
+</body>
+</html>

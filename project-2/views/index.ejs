@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Library Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #d8c4c9, #ff9671);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    header .logo {
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+   
+    header .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    /* Search bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-right: 100px;
+    }
+    .search-bar input {
+      border: none;
+      outline: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      width: 180px;
+    }
+    .search-bar button {
+      border: none;
+      background: #2575fc;
+      color: white;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .search-bar button:hover {
+      background: #1a56d4;
+    }
+
+    /* Buttons */
+    .btn {
+      background:blue;
+      color: white;
+      padding: 8px 15px;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #8dde91;
+    }
+    .btn.danger {
+      background: #f44336;
+    }
+    .btn.danger:hover {
+      background: #d32f2f;
+    }
+
+    /* Banner */
+    .banner {
+      background: url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1500&q=80") no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .banner::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      border-radius: 0 0 20px 20px;
+    }
+    .banner-content {
+      position: relative;
+      z-index: 1;
+    }
+    .banner h1 {
+      font-size: 36px;
+      margin: 0 0 10px;
+    }
+    .banner p {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    /* Main */
+    main {
+      flex: 1;
+      padding: 30px;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Cards Grid */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      justify-items: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 80%;
+      max-width: 300px;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+        width: 100%;
+        height: 200px;   
+        object-fit: contain; 
+        border-radius: 10px;
+        background: #fff; 
+        padding: 5px;
+}
+    .card h3 {
+      color: #3f51b5;
+      margin: 12px 0 6px;
+      font-size: 18px;
+    }
+    .card p {
+      color: #902e2e;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+    .actions {
+      margin-top: 12px;
+    }
+    .actions a {
+      margin: 0 5px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #d76941, #d8c4c9);
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 40px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+    }
+    footer .footer-links {
+      margin-bottom: 10px;
+    }
+    footer .footer-links a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    footer .footer-links a:hover {
+      color: #ffe6e6;
+    }
+    footer .social-icons {
+      margin: 10px 0;
+    }
+    footer .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 30px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer .social-icons a:hover {
+      color: #222;
+    }
+    footer p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    @media screen and (max-width: 1000px) {
+      .card-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media screen and (max-width: 650px) {
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="Library Logo">
+      <span>My Library</span>
+    </div>
+
+    <div class="header-right">
+
+      <a class="btn" href="/add-book">+ Add Book</a>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <div class="banner-content">
+      <h1>Welcome to My Library</h1>
+      <p>Explore thousands of books, authors, and categories</p><br>
+      <a href="/add-book" class="btn">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main>
+    <h2>Book List</h2>
+    <div class="card-container">
+      <% books.forEach(book => { %>
+        <div class="card">
+          <% if(book.image) { %>
+            <img src="<%= book.image %>" alt="<%= book.title %>">
+          <% } else { %>
+            <div style="width:100%; height:120px; background:#ddd; display:flex; align-items:center; justify-content:center; border-radius:10px; color:#888;">
+              No Image
+            </div>
+          <% } %>
+          <h3><%= book.title %></h3>
+          <p><b>Author:</b> <%= book.author %></p>
+          <p><b>Category:</b> <%= book.category %></p><br>
+          <div class="actions">
+            <a href="/edit-book/<%= book.id %>" class="btn">Edit</a>
+            <a href="/delete-book/<%= book.id %>" class="btn danger">Delete</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p>© 2025 My Library | Designed with users </p>
+  </footer>
+</body>
+</html>
