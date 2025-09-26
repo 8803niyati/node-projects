@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Book</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      background: #f4f6f9; 
+    }
+
+    /* Header */
+    header { 
+      background: linear-gradient(90deg, #d8c4c9, #ff9671); 
+      color: white; 
+      padding: 15px 20px; 
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    /* Form Container */
+    .form-box {
+      background: #fff;
+      margin: 50px auto;
+      padding: 30px 40px;
+      border-radius: 12px;
+      width: 500px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .form-box h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #e94e3c;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table td { 
+      padding: 12px 10px; 
+      font-weight: bold;
+      color: #444;
+      text-align: left;
+    }
+
+    input { 
+      padding: 10px; 
+      border: 1px solid #ccc; 
+      border-radius: 6px; 
+      width: 100%; 
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #ff6f61;
+      box-shadow: 0 0 6px rgba(255,110,97,0.5);
+      outline: none;
+    }
+
+    /* Button */
+    button { 
+      padding: 12px 25px; 
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-size: 15px; 
+      background: linear-gradient(90deg,#28a745,#20c997); 
+      color: white; 
+      font-weight: bold;
+      transition: 0.3s;
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg,#20c997,#28a745);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Header with logo -->
+  <header onclick="window.location.href='/'">
+    <h1>📚 My Book Store</h1>
+  </header>
+
+  <!-- Edit Book Form -->
+  <div class="form-box">
+    <h2>EDIT BOOK</h2>
+    <form action="/update-book/<%= book._id %>" method="post">
+      <table>
+        <tr>
+          <td>Title:</td>
+          <td><input type="text" name="title" value="<%= book.title %>" required /></td>
+        </tr>
+        <tr>
+          <td>Author:</td>
+          <td><input type="text" name="author" value="<%= book.author %>" required /></td>
+        </tr>
+        <tr>
+          <td>Price:</td>
+          <td><input type="number" step="0.01" name="price" value="<%= book.price %>" required /></td>
+        </tr>
+        <tr>
+          <td>Year:</td>
+          <td><input type="number" name="year" value="<%= book.year %>" /></td>
+        </tr>
+        <tr>
+          <td>Cover Image:</td>
+          <td><input type="text" name="coverImage" value="<%= book.coverImage %>" placeholder="https://example.com/book.jpg" /></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <button type="submit">Update Book</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+</body>
+</html>
