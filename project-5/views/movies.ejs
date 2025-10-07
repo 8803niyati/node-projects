@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movies</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: white;
+      padding: 15px 30px;
+    }
+
+    header .logo {
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+    }
+
+    header a.add-movie {
+      text-decoration: none;
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      max-width: 1000px;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 15px;
+      flex-wrap: wrap;
+    }
+
+    .filter-bar input,
+    .filter-bar select,
+    .filter-bar button {
+      padding: 8px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .filter-bar button {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .filter-bar button:hover {
+      background-color: #1976D2;
+    }
+
+    /* Banner */
+    .banner {
+      width: 100%; 
+      height: 400px;
+      background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20230703/pngtree-3d-render-of-cinema-with-blank-white-projection-screen-image_3732825.jpg");
+      background-size: cover; 
+      background-position: center; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      color: white; 
+      font-size: 36px;
+      font-weight: bold; 
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6); 
+    }
+
+    .banner h3 {
+      background: rgba(0,0,0,0.5);
+      padding: 10px 25px; 
+      border-radius: 8px; 
+    }
+
+    /* Page Title */
+    h1 {
+      text-align: center;
+      color: #333;
+      margin: 30px 0;
+    }
+
+    /* Movie Grid */
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      width: 90%;
+      max-width: 1300px;
+      margin: 40px auto 60px;
+      padding: 0;
+    }
+
+    /* Movie Card */
+    .movie-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .movie-card .no-image {
+      width: 100%;
+      height: 280px;
+      background: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .movie-info {
+      padding: 12px 15px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .movie-info h3 {
+      font-size: 22px;
+      margin: 0 0 10px 0;
+      text-align: center;
+      color: #c76a00;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      border-top: 1px solid #eee;
+    }
+
+    .actions a {
+      text-decoration: none;
+      color: white;
+      background-color: #2196F3;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .actions a.delete-icon {
+      background-color: #f44336;
+    }
+
+    .actions a.view-icon {
+      background-color: #a75f5a;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">Book My Show</a>
+    <a href="/add" class="add-movie">Add Movie</a>
+  </header>
+
+  <!-- Filter & Search Bar -->
+  <div class="filter-bar">
+    <form action="/" method="GET" style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%;">
+      <input type="text" name="search" placeholder="Search by title..." value="<%= search || '' %>">
+
+     
+
+      <select name="year">
+        <option value="">All Years</option>
+        <% for(let y = 2025; y >= 1990; y--) { %>
+          <option value="<%= y %>" <%= year == y ? 'selected' : '' %>><%= y %></option>
+        <% } %>
+      </select>
+
+      <button type="submit">Filter</button>
+
+      <a href="/" style="text-decoration:none;">
+        <button type="button" style="background:#777;">Clear</button>
+      </a>
+    </form>
+  </div>
+
+  <div class="banner">
+    Welcome to Book My Show!
+  </div>
+
+  <h1>Movie List</h1>
+
+  <div class="movies-grid">
+    <% if (movies.length === 0) { %>
+      <p style="text-align:center; width:100%; font-size:18px;">No movies found.</p>
+    <% } else { %>
+      <% movies.forEach(movie => { %>
+        <div class="movie-card">
+          <% if (movie.poster) { %>
+            <img src="/<%= movie.poster %>" alt="<%= movie.title %>">
+          <% } else { %>
+            <div class="no-image">No Image</div>
+          <% } %>
+
+          <div class="movie-info">
+            <h3><%= movie.title %></h3>
+            <p><strong>Genre:</strong> <%= movie.genre %></p>
+            <p><strong>Year:</strong> <%= movie.year %></p>
+            <% if (movie.releaseDate) { %>
+              <p><strong>Release:</strong> <%= new Date(movie.releaseDate).toLocaleDateString() %></p>
+            <% } %>
+            <% if (movie.director) { %>
+              <p><strong>Director:</strong> <%= movie.director %></p>
+            <% } %>
+            <% if (movie.language) { %>
+              <p><strong>Language:</strong> <%= movie.language %></p>
+            <% } %>
+          </div>
+
+          <div class="actions">
+            <a href="/view/<%= movie._id %>" class="view-icon" title="View">
+              <i class="ri-eye-fill"></i>
+            </a>
+            <a href="/edit/<%= movie._id %>" class="edit-icon" title="Edit">
+              <i class="ri-edit-2-fill"></i>
+            </a>
+            <a href="/delete/<%= movie._id %>" class="delete-icon" title="Delete">
+              <i class="ri-delete-bin-6-fill"></i>
+            </a>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+
+  <footer style="background-color:#333; color:white; text-align:center; padding:20px 0; font-size:14px; margin-top:40px;">
+    <p>&copy; <%= new Date().getFullYear() %> Book My Show. All rights reserved.</p>
+    <p>
+      <a href="#" style="color:#4CAF50; text-decoration:none; margin:0 10px;">Privacy Policy</a> | 
+      <a href="#" style="color:#4CAF50; text-decoration:none; margin:0 10px;">Terms of Service</a>
+    </p>
+  </footer>
+
+</body>
+</html>
