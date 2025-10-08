@@ -2,27 +2,41 @@ const Movie = require("../models/movie.model");
 
 exports.getMovies = async (req, res) => {
   try {
-    const { search, year,} = req.query; 
+    const { search, year, sort } = req.query;
     let filter = {};
 
-  
     if (search) {
-      filter.title = { $regex: search, $options: "i" }; 
+      filter.title = { $regex: search, $options: "i" };
     }
-    if (year) {
-      filter.year = year;
+
+    let moviesQuery = Movie.find(filter);
+
+    if (sort === "title_asc") {
+      moviesQuery = moviesQuery.sort({ title: 1 });
+    } else if (sort === "title_desc") {
+      moviesQuery = moviesQuery.sort({ title: -1 });
+    } else if (sort === "year_asc") {
+      moviesQuery = moviesQuery.sort({ year: 1 });
+    } else if (sort === "year_desc") {
+      moviesQuery = moviesQuery.sort({ year: -1 });
+    } else {
+   
+      moviesQuery = moviesQuery.sort({ createdAt: -1 });
     }
-     const movies = await Movie.find(filter).sort({ createdAt: -1 });
-     res.render("movies", {
+
+    const movies = await moviesQuery;
+
+    res.render("movies", {
       movies,
       search: search || "",
-     
       year: year || "",
+      sort: sort || "",
     });
   } catch (err) {
     res.status(500).send("Error fetching movies: " + err.message);
   }
 };
+
 
 exports.addMovieForm = (req, res) => {
   res.render("add-movie");

@@ -43,8 +43,6 @@
       color: #ff4757;
       transform: translateX(-3px);
     }
-
-    /* ===== Container ===== */
     .container {
       max-width: 1100px;
       margin: 60px auto;
@@ -62,8 +60,6 @@
       transform: scale(1.01);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     }
-
-    /* ===== Poster ===== */
     .poster {
       flex: 1;
       position: relative;
@@ -77,12 +73,6 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
       transition: transform 0.4s ease;
     }
-
-    .poster img:hover {
-      transform: scale(1.05);
-    }
-
-    /* ===== Movie Info ===== */
     .movie-info {
       flex: 2;
     }
@@ -95,17 +85,6 @@
       display: inline-block;
       padding-bottom: 5px;
     }
-
-    .rating {
-      color: #FFD700;
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    .rating i {
-      margin-right: 3px;
-    }
-
     .movie-info p {
       font-size: 16px;
       color: #444;
@@ -200,15 +179,6 @@
   <div class="movie-info">
     <h2><%= movie.title %></h2>
 
-    <!-- Rating Stars -->
-    <div class="rating">
-      <i class="ri-star-fill"></i>
-      <i class="ri-star-fill"></i>
-      <i class="ri-star-fill"></i>
-      <i class="ri-star-half-fill"></i>
-      <i class="ri-star-line"></i>
-    </div>
-
     <p><strong>Genre:</strong> <%= movie.genre %></p>
     <p><strong>Year:</strong> <%= movie.year %></p>
     <% if(movie.releaseDate){ %>
@@ -226,7 +196,6 @@
 
     <div class="btn-group">
       <a href="/" class="back-btn"><i class="ri-arrow-left-line"></i> Back</a>
-      <a href="#" class="book-btn"><i class="ri-ticket-2-line"></i> Book Now</a>
     </div>
   </div>
 </div>

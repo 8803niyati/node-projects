@@ -189,27 +189,31 @@
     <a href="/add" class="add-movie">Add Movie</a>
   </header>
 
-  <!-- Filter & Search Bar -->
-  <div class="filter-bar">
-    <form action="/" method="GET" style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%;">
-      <input type="text" name="search" placeholder="Search by title..." value="<%= search || '' %>">
+ <!-- Filter, Search & Sort Bar -->
+<div class="filter-bar">
+  <form action="/" method="GET" style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%;">
 
-     
+    <input 
+      type="text" 
+      name="search" 
+      placeholder="Search by title..." 
+      value="<%= search || '' %>">
+    <select name="sort">
+      <option value="">Sort By</option>
+      <option value="title_asc" <%= sort === 'title_asc' ? 'selected' : '' %>>Title (A–Z)</option>
+      <option value="title_desc" <%= sort === 'title_desc' ? 'selected' : '' %>>Title (Z–A)</option>
+      <option value="year_asc" <%= sort === 'year_asc' ? 'selected' : '' %>>Year (Old–New)</option>
+      <option value="year_desc" <%= sort === 'year_desc' ? 'selected' : '' %>>Year (New–Old)</option>
+    </select>
 
-      <select name="year">
-        <option value="">All Years</option>
-        <% for(let y = 2025; y >= 1990; y--) { %>
-          <option value="<%= y %>" <%= year == y ? 'selected' : '' %>><%= y %></option>
-        <% } %>
-      </select>
+    <button type="submit">Apply</button>
 
-      <button type="submit">Filter</button>
+    <a href="/" style="text-decoration:none;">
+      <button type="button" style="background:#777;">Clear</button>
+    </a>
+  </form>
+</div>
 
-      <a href="/" style="text-decoration:none;">
-        <button type="button" style="background:#777;">Clear</button>
-      </a>
-    </form>
-  </div>
 
   <div class="banner">
     Welcome to Book My Show!
