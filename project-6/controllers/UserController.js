@@ -1,24 +1,21 @@
-
-
-
 const mongoose = require("mongoose");
 const User = require("../models/UserModel");
 const path = require("path");
 const fs = require("fs");
 
-
+// =================== LOGOUT ===================
 exports.logout = async (req, res) => {
   res.clearCookie("user");
   return res.redirect("/");
 };
 
-
+// =================== LOGIN PAGE ===================
 exports.loginPage = async (req, res) => {
   if (req.cookies?.user?._id) return res.redirect("/dashboard");
   return res.render("login");
 };
 
-
+// =================== DASHBOARD ===================
 exports.dashBoard = async (req, res) => {
   if (!req.cookies?.user?._id) {
     const user = {
@@ -33,7 +30,7 @@ exports.dashBoard = async (req, res) => {
   return res.render("dashboard", { user: req.cookies.user });
 };
 
-
+// =================== LOGIN USER ===================
 exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -52,7 +49,7 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-
+// =================== PROFILE PAGE ===================
 exports.profilePage = async (req, res) => {
   try {
     if (!req.cookies?.user?._id) return res.redirect("/");
@@ -75,7 +72,7 @@ exports.profilePage = async (req, res) => {
   }
 };
 
-
+// =================== CHANGE PASSWORD PAGE ===================
 exports.changePasswordPage = async (req, res) => {
   if (!req.cookies?.user?._id) return res.redirect("/");
   let user = null;
@@ -89,7 +86,7 @@ exports.changePasswordPage = async (req, res) => {
   res.render("change_pass", { user });
 };
 
-
+// =================== CHANGE PASSWORD ===================
 exports.changePassword = async (req, res) => {
   try {
     const { old_password, password, c_password } = req.body;
@@ -134,13 +131,9 @@ exports.changePassword = async (req, res) => {
   }
 };
 
-
+// =================== ADD USER PAGE ===================
 exports.addUserPage = async (req, res) => {
-  if (
-    !req.cookies ||
-    !req.cookies.user ||
-    !req.cookies.user._id
-  ) {
+  if (!req.cookies?.user?._id) {
     return res.redirect("/");
   }
 
@@ -154,7 +147,7 @@ exports.addUserPage = async (req, res) => {
   return res.render("add_user", { user });
 };
 
-
+// =================== VIEW ALL USERS ===================
 exports.viewAllUserPage = async (req, res) => {
   try {
     let users = await User.find();
@@ -170,13 +163,11 @@ exports.viewAllUserPage = async (req, res) => {
   }
 };
 
-
+// =================== ADD NEW USER ===================
 exports.addNewUser = async (req, res) => {
   try {
-    let imagePath = "";
     if (req.file) {
-      imagePath = `/uploads/${req.file.filename}`;
-      req.body.image = imagePath;
+      req.body.image = `/uploads/${req.file.filename}`;
     }
 
     await User.create(req.body);
@@ -186,10 +177,10 @@ exports.addNewUser = async (req, res) => {
   }
 };
 
-
+// =================== EDIT USER PAGE ===================
 exports.editUserPage = async (req, res) => {
   try {
-    let user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     if (user) {
       return res.render("edit_user", { user });
     } else {
@@ -200,44 +191,46 @@ exports.editUserPage = async (req, res) => {
   }
 };
 
-
+// =================== UPDATE USER ===================
 exports.updateUser = async (req, res) => {
   try {
-    let user = await User.findById(req.params.id);
-    if (user) {
-      if (req.file) {
-        let oldPath = path.join(__dirname, "..", user.image || "");
-        try {
-          fs.unlinkSync(oldPath);
-        } catch {
-          console.log("Old image not found...");
-        }
+    const user = await User.findById(req.params.id);
 
+    if (user) {
+      // If new image uploaded, remove old image
+      if (req.file) {
+        const oldPath = path.join(__dirname, "..", user.image || "");
+        if (fs.existsSync(oldPath)) {
+          try {
+            fs.unlinkSync(oldPath);
+          } catch {
+            console.log("Old image not found...");
+          }
+        }
         req.body.image = `/uploads/${req.file.filename}`;
       }
 
       await User.findByIdAndUpdate(user._id, req.body, { new: true });
+      console.log("✅ User updated successfully.");
       return res.redirect("/user/view-users");
     } else {
+      console.log("❌ User not found.");
       return res.redirect("/user/view-users");
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error updating user:", error);
   }
 };
 
-
-
-
+// =================== DELETE USER ===================
 exports.deleteUser = async (req, res) => {
   try {
-    let id = req.params.id;
-    let user = await User.findById(id);
+    const id = req.params.id;
+    const user = await User.findById(id);
 
     if (user) {
-     
       if (user.image) {
-        let imagePath = path.join(__dirname, "..", user.image);
+        const imagePath = path.join(__dirname, "..", user.image);
         if (fs.existsSync(imagePath)) {
           try {
             fs.unlinkSync(imagePath);
@@ -248,12 +241,11 @@ exports.deleteUser = async (req, res) => {
         }
       }
 
-    
       await User.findByIdAndDelete(id);
-      console.log("User deleted successfully.");
+      console.log("✅ User deleted successfully.");
       return res.redirect("/user/view-users");
     } else {
-      console.log("User not found.");
+      console.log("❌ User not found.");
       return res.redirect("/user/view-users");
     }
   } catch (error) {

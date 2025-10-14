@@ -1,16 +1,17 @@
 {
-  "name": "node-pr-6-adminpanel",
+  "name": "pr_6",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "dev": "nodemon app.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mongoose": "^8.19.1",
+    "mongoose": "^8.18.1",
     "multer": "^2.0.2",
     "nodemon": "^3.1.10"
   }
