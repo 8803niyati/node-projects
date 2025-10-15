@@ -1,81 +1,231 @@
 <%- include('header') %>
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Tables</h4>
-                        <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
+
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Tables</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title m-b-0">Admion Information</h5>
-                            </div>
-                           <div class="container">
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-0">Admin Information</h5>
+                    </div>
+
+                    <div class="container py-4">
                         <h2>All Users</h2>
+
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Gender</th>
-                                <th>Hobbies</th>
-                            </tr>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Hobbies</th>
+                                    <th>Actions</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <% users.forEach(user => { %>
                                 <tr>
-                                    <td><img src="<%= user.image ? user.image : '/assets/images/default-avatar.png' %>" width="50"/></td>
-                                    <td><%= user.firstname %> <%= user.lastname %></td>
-                                    <td><%= user.email %></td>
-                                    <td><%= user.gender %></td>
-                                    <td><%= user.hobbies.join(', ') %></td>
-                                    <td><a href="/user/edit-user/<%= user._id %>"><i class="fa fa-edit "></i></a> &nbsp; || &nbsp; <a href="/user/delete-user/<%= user._id %>"><i class="fa fa-trash"></i></a>
-                                          </td>
+                                    <td data-label="Image">
+                                        <img src="<%= user.image ? user.image : '/assets/images/default-avatar.png' %>" width="50" />
+                                    </td>
+                                    <td data-label="Name"><%= user.firstname %> <%= user.lastname %></td>
+                                    <td data-label="Email"><%= user.email %></td>
+                                    <td data-label="Gender"><%= user.gender %></td>
+                                    <td data-label="Hobbies"><%= user.hobbies.join(', ') %></td>
+                                    <td data-label="Actions">
+                                        <a href="/user/edit-user/<%= user._id %>"><i class="fa fa-edit"></i></a>
+                                        &nbsp; | &nbsp;
+                                        <a href="/user/delete-user/<%= user._id %>"><i class="fa fa-trash"></i></a>
+                                    </td>
                                 </tr>
                                 <% }) %>
-                             </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
-             </div>
             </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+</div>
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+
 <%- include('footer') %>
+
+<!-- ============================================================== -->
+<!-- Extra Styling -->
+<!-- ============================================================== -->
+<style>
+
+.container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2f3e9e;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.container h2::after {
+  content: "";
+  width: 80px;
+  height: 3px;
+  background: #2f3e9e;
+  display: block;
+  margin: 10px auto;
+  border-radius: 2px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #2f3e9e;
+  padding: 15px;
+  border-bottom: 2px solid #f0f0f0;
+  text-transform: uppercase;
+}
+
+/* ====== Table Styling ====== */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #2f3e9e;
+  color: #fff;
+  text-align: left;
+}
+
+.table thead th {
+  padding: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #eee;
+}
+
+.table tbody tr:hover {
+  background-color: #f7f9fc;
+  transform: scale(1.01);
+}
+
+.table tbody td {
+  padding: 12px 15px;
+  color: #333;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* ====== Image Styling ====== */
+.table img {
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.table img:hover {
+  transform: scale(1.1);
+}
+
+/* ====== Action Icons ====== */
+.table td a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #2f3e9e;
+  transition: 0.3s;
+}
+
+.table td a:hover {
+  color: #ff4757;
+  transform: scale(1.2);
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .table thead {
+    display: none;
+  }
+
+  .table, .table tbody, .table tr, .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    text-align: left;
+    font-weight: 600;
+    color: #2f3e9e;
+  }
+}
+</style>
