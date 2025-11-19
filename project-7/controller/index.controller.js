@@ -211,7 +211,7 @@ exports.sendEmail = async (req, res) => {
     });
 
     const mailMessage = {
-      from: "fenamavani37@gmail.com",
+      from: "niyatidhanani05@gmail.com",
       to: user.email,
       subject: "Reset Password for Admin Panel",
       html: `
