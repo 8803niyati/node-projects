@@ -1,79 +1,150 @@
 <%- include('../header') %>
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
+
+  <div class="page-wrapper">
+    <!-- Flash Alerts -->
+    <% if (locals.success) { %>
+      <script>
+        Swal.fire({
+          icon: "success",
+          title: "<%= success %>",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      </script>
+      <% } %>
+
+        <% if (locals.error) { %>
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "<%= error %>",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          </script>
+          <% } %>
+
             <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Tables</h4>
-                        <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
+              <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                  <h4 class="page-title">Sub Category Information</h4>
                 </div>
+              </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title m-b-0">Sub Category Information</h5>
-                            </div>
-                            <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">Category Name</th>
-                                      <th scope="col">Category Image</th>
-                                      <th scope="col">Sub Category Name</th>
-                                      <th scope="col">Actions</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                   <% subCategories.map((subCate, i)=> { %>
-                                        <tr>
-                                            <td><%= i+1 %></td>
-                                            <td><%= subCate.category.category %></td>
-                                            <td><img src="<%= subCate.category.categoryImage %>" height="80" /></td>
-                                            <td><%= subCate.subCategory %></td>
-                                            <td><a href="/subCategory/edit-subcategory/<%= subCate._id %>" class="btn btn-success">Edit</a> &nbsp; || &nbsp; <a href="/subCategory/delete-subcategory/<%= subCate._id %>" class="btn btn-danger">Delete</a> </td>
-                                        </tr>
-                                   <% }) %>
-                                  </tbody>
-                            </table>
-                        </div>
-                      
-                        
-                        
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title m-b-0">Sub Category Information</h5>
                     </div>
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Category Name</th>
+                          <th>Category Image</th>
+                          <th>Sub Category Name</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <% if (Array.isArray(subCategories) && subCategories.length) { %>
+
+                          <% subCategories.forEach((subCate, i)=> { %>
+                            <tr>
+                              <td>
+                                <%= i + 1 %>
+                              </td>
+
+                              <td>
+                                <%= subCate.category ? (subCate.category.categoryName || 'Unnamed Category' )
+                                  : 'No Category' %>
+                              </td>
+
+                              <td>
+                                <% if (subCate.category && subCate.category.categoryImage) { %>
+                                  <img src="<%= subCate.category.categoryImage %>" height="90" width="150">
+                                  <% } else { %>
+                                    No Image
+                                    <% } %>
+                              </td>
+
+                              <td>
+                                <%= subCate.subCategoryName %>
+                              </td>
+
+                              <td>
+                                <a href="/subcategory/edit-subcategory/<%= subCate._id %>">
+                                  <i class="fas fa-edit"></i>
+                                </a>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/subcategory/delete-subcategory/<%= subCate._id %>">
+                                  <i class="fas fa-trash"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            <% }) %>
+
+                              <% } else { %>
+
+                                <tr>
+                                  <td colspan="5">No sub categories found</td>
+                                </tr>
+
+                                <% } %>
+                      </tbody>
+
+                    </table>
+
+                  </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+              </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-<%- include('../footer') %>
+  </div>
+
+  <%- include('../footer') %>
+  <script>
+function deleteSubCategory(id) {
+    Swal.fire({
+        title: "Delete Sub Category?",
+        html: "<b>This action cannot be undone!</b><br><br>Deleting this Sub Category may also remove its Extra Categories.",
+        icon: "warning",
+        iconColor: "#ff6b6b",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#e63946",
+        cancelButtonColor: "#6c757d",
+        background: "#fff",
+        customClass: {
+            popup: "swal-popup",
+            title: "swal-title"
+        },
+        showClass: {
+            popup: "animate__animated animate__zoomIn"
+        },
+        hideClass: {
+            popup: "animate__animated animate__zoomOut"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            Swal.fire({
+                title: "Deleted!",
+                text: "Sub Category removed successfully.",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1200
+            });
+
+            setTimeout(() => {
+                window.location.href = `/subcategory/delete-subcategory/${id}`;
+            }, 1200);
+        }
+    });
+}
+</script>

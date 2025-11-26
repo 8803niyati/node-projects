@@ -1,16 +1,15 @@
 const express = require('express');
-const { addSubCategoryPage, addSubCategory, viewSubCategory, deleteSubCategory, editSubCategoryPage, updateSubCategory, getAllSubCategoies } = require('../controller/subcategory.controller');
+const { addSubCategoryPage, addSubCategory, viewSubCategory, deleteSubCategory, editSubCategoryPage, updateSubCategory } = require('../controllers/subCategory.controller');
+const routes = express.Router();
+
+routes.get("/add-subcategory", addSubCategoryPage);
+routes.post("/add-subcategory", addSubCategory);
+
+routes.get("/view-subCategory", viewSubCategory);
+
+routes.get("/delete-subcategory/:id", deleteSubCategory);
+routes.get("/edit-subcategory/:id", editSubCategoryPage);
+routes.post("/update-subcategory/:id", updateSubCategory);
 
 
-const subcategoryRoutes = express.Router();
-
-subcategoryRoutes.get("/add-subCategory", addSubCategoryPage);
-subcategoryRoutes.post("/add-subCategory", addSubCategory);
-subcategoryRoutes.get("/view-subCategory", viewSubCategory);
-subcategoryRoutes.get("/delete-subcategory/:id", deleteSubCategory);
-subcategoryRoutes.get("/edit-subcategory/:id", editSubCategoryPage);
-subcategoryRoutes.post("/update-subcategory/:id", updateSubCategory);
-subcategoryRoutes.get("/getAllSubCategory", getAllSubCategoies)
-
-
-module.exports = subcategoryRoutes;
+module.exports = routes;

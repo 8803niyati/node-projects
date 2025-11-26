@@ -1,43 +1,47 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require("../models/UserModel");
+const AdminModel = require('../models/UserModel');
+const bcrypt = require('bcrypt');
 
 passport.use(new LocalStrategy({
     usernameField: 'email'
-}, async function (email, password, done) {
-    let user = await User.findOne({email: email});
-    if(!user){
-        return done(null, false);
-    }else{
-        if(password == user.password){
-            return done(null, user);
-        }else{
-            return done(null, false);
-        }
+}, async (email, password, cb) => {
+    let admin = await AdminModel.findOne({ email: email });
+    if (!admin) {
+        return cb(null, false);
+    }
+    let matchpass = await bcrypt.compare(password, admin.password)
+    if (!matchpass) {
+        return cb(null, false);
+    } else {
+        return cb(null, admin)
     }
 }));
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
+passport.serializeUser((user, cb)=> {
+    return cb(null, user.id);
+})
 
-passport.deserializeUser(async(id, done) => {
-    let user = await User.findById(id);
-    if(user){
-        done(null, user);
+passport.deserializeUser(async(id, cb)=> {
+    let admin = await AdminModel.findById(id);
+    if(admin){
+        return cb(null, admin)
     }
-});
-passport.checkAuthentication = (req, res, next) => {
+})
+
+passport.setAuthenticated = (req, res, next) => {
     if(req.isAuthenticated()){
         next();
     }else{
         return res.redirect("/");
     }
 }
-passport.setAutheticatUser = (req, res, next) => {
-    if(req.user){
+
+passport.setValidateUser = (req, res, next) => {
+    if(req.isAuthenticated()){
         res.locals.user = req.user;
     }
     next();
 }
+
 module.exports = passport;

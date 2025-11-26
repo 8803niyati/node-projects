@@ -1,13 +1,30 @@
-const express = require("express");
-const { addCategoryPage, addNewCategory, viewCategoryPage, deleteCategory, editCategoryPage, updateCategory } = require("../controller/category.controller");
-const upload = require("../middleware/uploadImage");
+const express = require('express');
+const routes = express.Router();
 
-const categoryRoutes = express.Router();
+const {
+    addCategoryPage,
+    viewCategoryPage,
+    editCategoryPage,
+    updateCategory,
+    addNewCategory,
+    deleteCategory
+} = require('../controllers/category.controller');
 
-categoryRoutes.get("/add-category", addCategoryPage);
-categoryRoutes.get("/view-categories", viewCategoryPage);
-categoryRoutes.get("/delete-category/:id", deleteCategory);
-categoryRoutes.get("/edit-category/:id", editCategoryPage);
-categoryRoutes.post("/update-category/:id",upload.single('categoryImage'), updateCategory);
-categoryRoutes.post("/add-category",upload.single('categoryImage'), addNewCategory)
-module.exports = categoryRoutes;
+const uploadImage = require('../middleware/uploadImage');
+
+routes.get("/add-category", addCategoryPage);
+routes.get("/view-category", viewCategoryPage);
+
+routes.get("/edit-category/:id", editCategoryPage);
+
+routes.post(
+  "/update-category/:id",
+  uploadImage.single("categoryImage"),
+  updateCategory
+);
+
+routes.post("/add-category", uploadImage.single("categoryImage"), addNewCategory);
+
+routes.get("/delete-category/:id", deleteCategory);
+
+module.exports = routes;

@@ -1,14 +1,16 @@
-const express = require('express');
-const { extraCategoryPage, extraCategory, deleteExtraCategory, editExtraCategory, viewExtraCategory, updateExtraCategory, getAllExtraCategory, postEditProduct } = require('../controller/extraCategory.controller');
+const router = require("express").Router();
+const ExtraCategory = require("../controllers/extraCategory.controller");
 
-const etcCategoryRoutes = express.Router();
+router.get("/subcategory/:categoryId", ExtraCategory.getAllSubCategories);
 
-etcCategoryRoutes.get("/add-extraCategory", extraCategoryPage);
-etcCategoryRoutes.post("/add-extraCategory", extraCategory);
-etcCategoryRoutes.get("/view-extraCategory", viewExtraCategory);
-etcCategoryRoutes.get("/delete-extraCategory/:id", deleteExtraCategory);
-etcCategoryRoutes.get("/edit-extraCategory/:id", editExtraCategory);
-etcCategoryRoutes.post("/update-extraCategory/:id", updateExtraCategory);
-etcCategoryRoutes.get("/getAllExtraCategory", getAllExtraCategory)
+router.get("/add-extracategory", ExtraCategory.addExtraCategoryPage);
+router.post("/add-extracategory", ExtraCategory.extraCategory);
 
-module.exports = etcCategoryRoutes;
+router.get("/view-extracategory", ExtraCategory.viewExtraCategory);
+
+router.get("/delete-extracategory/:id", ExtraCategory.deleteExtraCategory);
+
+router.get("/edit-extracategory/:id", ExtraCategory.editExtraCategoryPage);
+router.post("/update-extracategory/:id", ExtraCategory.updateExtraCategory);
+
+module.exports = router;
